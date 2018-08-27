@@ -1,0 +1,210 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  // 启用哪个规则集：启用最全的规则集（最全规则集eslint:all，默认是eslint:recommended）
+  "extends": [
+    "eslint:all"
+    //    "plugin:vue/essential"
+  ],
+  // 使用哪种解析器：使用babel-eslint而不使用默认的espree（因为babel-eslint比espree超前，espree不支持某些先进的语法）
+  "parser": "babel-eslint",
+  // 指定解析器的选项
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  // 规则调整
+  "rules": {
+    /********************************** 修改 **********************************/
+    // 每行头部缩进：2字符
+    "indent": [
+      "error",
+      2
+    ],
+    // 每行结束的方式：unix方式（\n）
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    // 字符串引号类型：单引号或反引号（'a'、`a`）
+    "quotes": [
+      "error",
+      "single"
+    ],
+    // 表达式结尾是否需要分号：总是需要
+    "semi": [
+      "error",
+      "always"
+    ],
+    // 对象属性和数组项是否必须尾随逗号：多行时必须使用
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    // 每行最大长度：最大长度包括代码+注释（忽略一些特殊情况）
+    "max-len": [
+      "error",
+      {
+        // 最大长度
+        "code": 200,
+        // 忽略评论代码行最大长度（// This is a really really really really really really really really really long comment）
+        "ignoreComments": true,
+        // 忽略结尾带评论的代码行最大长度（var foo = 'bar'; // This is a really really really really really really really long comment）
+        "ignoreTrailingComments": true,
+        // 忽略带url的代码行最大长度（var url = 'https://www.example.com/really/really/really/really/really/really/really/long';）
+        "ignoreUrls": true,
+        // 忽略带字符串的代码行最大长度（var longString = 'this is a really really really really really long string!';）
+        "ignoreStrings": true,
+        // 忽略带模板字符串的代码行最大长度（var longTemplateLiteral = `this is a really really really really really long template literal!`;）
+        "ignoreTemplateLiterals": true,
+        // 忽略带正则表达式的代码行最大长度（var longRegExpLiteral = /this is a really really really really really long regular expression!/;）
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    // 对象属性名是否需要引号：有需要时才用引号（'a-1'）
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    // 大括号内部收尾是否要用空行：不要空行
+    "padded-blocks": [
+      "error",
+      "never"
+    ],
+    // 是否检测未使用的变量：只有方法的参数不需要检测
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none"
+      }
+    ],
+    // 是否检测未使用的变量：只有方法的参数不需要检测
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    // 三元表达式是否多行：可以单行也可以多行，如果多行则强制三元表达式每一元都占一行
+    "multiline-ternary": [
+      "error",
+      "always-multiline"
+    ],
+    // 规定指向this的变量名称：ts
+    "consistent-this": [
+      "error",
+      "ts"
+    ],
+    /********************************** 关闭 **********************************/
+    // require关键字是否必须置顶：不需要
+    "global-require": [
+      "off"
+    ],
+    // 注释首字母是英文时是否必须大写：不需要
+    "capitalized-comments": [
+      "off"
+    ],
+    // import顺序是否需要按定义变量名来升序或降序排列：不需要
+    "sort-imports": [
+      "off"
+    ],
+    // 是否禁止注释与代码出现在同一行：不禁止
+    "no-inline-comments": [
+      "off"
+    ],
+    // 是否限制每个文件最多只能有一个class：不限制
+    "max-classes-per-file": [
+      "off"
+    ],
+    // 是否禁止空函数：不禁止
+    "no-empty-function": [
+      "off"
+    ],
+    // 是否限制变量长度：不限制
+    "id-length": [
+      "off"
+    ],
+    // 是否禁止使用三元运算符：不禁止
+    "no-ternary": [
+      "off"
+    ],
+    // 是否禁止复杂的操作符：不禁止
+    "no-mixed-operators": [
+      "off"
+    ],
+    // 是否限制多行注释类型：不限制(//或者/**/都可以)
+    "multiline-comment-style": [
+      "off"
+    ],
+    // 是否建议未修改的变量使用const来生命：不需要
+    "prefer-const": [
+      "off"
+    ],
+    // 是否禁止debugger：不禁止
+    "no-debugger": [
+      "off"
+    ],
+    // 是否需要对变量做字典排序：不需要
+    "sort-vars": [
+      "off"
+    ],
+    // 是否需要对象每个属性单独一行：不需要
+    "object-property-newline": [
+      "off"
+    ],
+    // 方法定义是否必须有名称：不必须
+    "func-names": [
+      "off"
+    ],
+    // 是否禁止出现 ++ 或 -- ：不禁止
+    "no-plusplus": [
+      "off"
+    ],
+    // 是否禁止使用console对象：不禁止
+    "no-console": [
+      "off"
+    ],
+    // 是否强制方法有返回值：不强制
+    "consistent-return": [
+      "off"
+    ],
+    // 是否强制方法有返回值：不强制
+    "consistent-return": [
+      "off"
+    ],
+    // 是否强制数组方法有返回值：不强制
+    "array-callback-return": [
+      "off"
+    ],
+    // 是否强制每次链式调用必须换行：不强制
+    "newline-per-chained-call": [
+      "off"
+    ],
+    // 规定注释允许出现在哪里，前后是否需要空行：不检测
+    "lines-around-comment": [
+      "off"
+    ],
+    // 规定注释允许出现在哪里，前后是否需要空行：不检测
+    "lines-around-comment": [
+      "off"
+    ],
+    // 不允许出现不知含义的数字，强制代码中的每一个变量被定义成变量或常量：不检测（临时性关闭，新代码时可以开启）
+    "no-magic-numbers": [
+      "off"
+    ],
+    // 每个代码文件最大长度：不限制
+    "max-lines": [
+      "off"
+    ],
+    // 对象属性定义是否需要按对象属性名来升序或降序排列：不需要
+    "sort-keys": [
+      "off"
+    ]
+  }
+}
