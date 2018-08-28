@@ -8,7 +8,8 @@
   },
   "scripts": {
     "compile": "babel src -d dist -w",
-    "service": "node ./dist/spider.js"
+    "spider": "node ./dist/spider.js",
+    "service": "node ./dist/service.js"
   },
   "author": "fe",
   "license": "ISC",
@@ -30,7 +31,10 @@
     "babel-preset-stage-2": "6.24.1",
     "babel-preset-stage-3": "6.24.1",
     "babel-runtime": "6.26.0",
+    "cookie-parser": "^1.4.3",
     "eslint": "^5.4.0",
-    "mysql": "^2.16.0"
+    "moment": "^2.22.2",
+    "mysql": "^2.16.0",
+    "through2": "^2.0.3"
   }
 }
