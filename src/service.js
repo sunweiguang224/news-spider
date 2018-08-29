@@ -56,6 +56,13 @@ app.use(cookieParser());
 
 // 设置全局response header
 app.use((req, res, next) => {
+    // res.set('Content-Type', 'application/json');
+    // res.set('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Origin', '*');
+
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+
     next();
 });
 
@@ -71,7 +78,6 @@ app.use(express.Router().get('/api/queryNewsList', async (req, res, next) => {
         category: req.query.category,
         pageNo: req.query.pageNo,
     });
-    res.set('Content-Type', 'application/json');
     res.end(JSON.stringify(obj));
 }));
 
