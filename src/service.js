@@ -77,6 +77,7 @@ app.use(express.Router().get('/api/queryNewsList', async (req, res, next) => {
     let obj = await queryNewsList({
         category: req.query.category,
         pageNo: req.query.pageNo,
+        pageSize: req.query.pageSize,
     });
     res.end(JSON.stringify(obj));
 }));
