@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import http from 'http';
 
 /**
- * 插入新闻
+ * 新闻列表分页查询
  * @param news
  * @return {Promise.<void>}
  */
@@ -26,6 +26,35 @@ async function queryNewsList({pageSize = 10, pageNo = 1, category = '推荐'}) {
                         }
                     }
                     resolve(results);
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    });
+}
+
+/**
+ * 新闻详情查询
+ * @param news
+ * @return {Promise.<void>}
+ */
+async function queryNewsDetail({id}) {
+    return new Promise((resolve, reject) => {
+        db.connect(function (connection) {
+            let sql = `select ${model.map(item => `\`${item}\``)} from news where id='${id}'`;
+            console.log(sql);
+            connection.query(sql, (err, results, fields) => {
+                if (!err) {
+                    for (let item of results) {
+                        for (let i in item) {
+                            try {
+                                item[i] = JSON.parse(item[i]);
+                            } catch (err) {
+                            }
+                        }
+                    }
+                    resolve(results && results[0]);
                 } else {
                     reject(err);
                 }
@@ -63,6 +92,8 @@ app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
 
+    res.set("Content-Type", "application/json");
+
     next();
 });
 
@@ -72,12 +103,20 @@ app.use((err, req, res, next) => {
     res.status(500).send('服务器发生异常:\n' + err.stack);
 });
 
-// 注册通用级get路由
+// 新闻列表分页接口
 app.use(express.Router().get('/api/queryNewsList', async (req, res, next) => {
     let obj = await queryNewsList({
         category: req.query.category,
         pageNo: req.query.pageNo,
         pageSize: req.query.pageSize,
+    });
+    res.end(JSON.stringify(obj));
+}));
+
+// 新闻详情接口
+app.use(express.Router().get('/api/queryNewsDetail', async (req, res, next) => {
+    let obj = await queryNewsDetail({
+        id: req.query.id,
     });
     res.end(JSON.stringify(obj));
 }));
